@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 import re
 import sys
 import time
@@ -18,6 +21,7 @@ init(autoreset=True)
 # ═══════════════════════════════════════════════════════
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "") # 👈 required
+print("GROQ KEY:", repr(GROQ_API_KEY))
 GROQ_API_URL   = "https://api.groq.com/openai/v1/chat/completions"
 
 # Email alerts (optional — leave blank to skip)

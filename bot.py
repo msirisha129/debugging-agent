@@ -15,13 +15,20 @@ logger = logging.getLogger(__name__)
 #   CONFIG — set via environment variables
 # ─────────────────────────────────────────────
 
-import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_URL   = "https://api.groq.com/openai/v1/chat/completions"
 
 MODELS = [
+
+    "llama-3.1-8b-instant",
+    "llama-3.3-70b-versatile",
+
     "llama-3.1-8b-instant",
     "llama3-8b-8192",
     "mixtral-8x7b-32768",
@@ -112,6 +119,9 @@ def call_groq(messages: list) -> str:
         try:
             payload = {"model": model, "messages": messages, "max_tokens": 1500, "temperature": 0.3}
             resp = requests.post(GROQ_API_URL, headers=headers, json=payload, timeout=30)
+            print("STATUS:", resp.status_code)
+            print("RESPONSE:", resp.text)
+
             resp.raise_for_status()
             return resp.json()["choices"][0]["message"]["content"]
         except Exception as e:
@@ -308,7 +318,10 @@ def main():
 
     logger.info("🤖 Debugging Agent Bot starting...")
     print("TOKEN:", repr(TELEGRAM_TOKEN))
-    print("LENGTH:", len(TELEGRAM_TOKEN))
+    if TELEGRAM_TOKEN:
+        print("LENGTH:", len(TELEGRAM_TOKEN))
+    else:
+        print("TOKEN NOT FOUND")
     app = Application.builder().token(TELEGRAM_TOKEN).build()
 
     app.add_handler(CommandHandler("start",   start))
