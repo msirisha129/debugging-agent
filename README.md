@@ -1,76 +1,84 @@
-# 🤖 Debugging Agent
+# 🤖 Debugging Agent — AI Error Fixer + Telegram Bot
 
-A simple AI-powered agent that takes any error message and suggests a fix!
+> Paste any error. Get the fix. Instantly. From anywhere in the world. 📱
+
+Every error you paste gets **analyzed, fixed, logged and tracked automatically** — the agent keeps a full record of every bug it has ever fixed, building a personal error database that grows smarter over time.
 
 ---
 
-## ⚙️ Setup (One Time)
+## ✨ What It Does
 
-### Step 1 — Install Python
-Make sure Python is installed. Check by running:
-```
-python --version
-```
+- 🤖 **AI Fix** — Detects language, severity and category. Gives step-by-step fix with corrected code
+- 📁 **Auto Logs Every Fix** — Creates a new timestamped file in `fix_logs/` for every single error fixed
+- 🗂️ **Tracks All History** — Every error and fix stored in `error_history.json` — your personal bug database
+- 📊 **Error Statistics** — See which errors and languages you hit the most
+- 🌐 **Web Search** — Searches the web for extra context on every error automatically
+- 🔧 **Auto Fix Files** — Give it your `.py` file path and it patches the bug directly
+- 📧 **Email Alerts** — Sends the full fix report to your Gmail
+- 📱 **Telegram Bot** — Control everything from your phone, anywhere in the world
 
-### Step 2 — Install the required library
-```
-pip install anthropic
-```
+---
 
-### Step 3 — Get your API Key
-- Go to https://console.anthropic.com
-- Sign up / Login
-- Create an API key
+## 📁 Project Structure
 
-### Step 4 — Set your API Key
-
-**On Windows:**
 ```
-set ANTHROPIC_API_KEY=your_api_key_here
-```
-
-**On Mac/Linux:**
-```
-export ANTHROPIC_API_KEY=your_api_key_here
+debugging-agent/
+├── agent.py           # Full terminal version
+├── bot.py             # Telegram bot — control from phone
+├── requirements.txt   # Dependencies
+├── fix_logs/          # Auto-created — one fix file per error 📂
+├── error_history.json # Auto-created — full error database 🗄️
+└── README.md
 ```
 
 ---
 
-## ▶️ Run the Agent
+## ⚙️ Local Setup
 
+```bash
+git clone https://github.com/msirisha129/debugging-agent.git
+cd debugging-agent
+pip install -r requirements.txt
 ```
+
+Get your free API key → [console.groq.com](https://console.groq.com)
+
+```bash
+set GROQ_API_KEY=your_groq_key_here
 python agent.py
 ```
 
 ---
 
-## 💡 How to Use
+## 📱 Telegram Bot Commands
 
-1. Run the agent
-2. Paste your error message
-3. Press Enter twice
-4. Get your fix suggestion!
-
-### Example:
-```
-Enter your error: 
-NameError: name 'pd' is not defined
-[press Enter twice]
-
-⏳ Analyzing your error...
-
-✅ Here's what I found:
-1. What this means: You're using 'pd' but haven't imported pandas...
-2. Cause: Missing import statement
-3. Fix: Add this at the top of your file: import pandas as pd
-```
+| Command | What it does |
+|---------|-------------|
+| Paste any error | Instant AI fix |
+| `/history` | Last 5 errors fixed |
+| `/stats` | Your personal error statistics |
+| `/clear` | Clear history |
+| `/help` | Help menu |
 
 ---
 
-## 📁 Files
+## 🚀 Deployment
 
-| File | What it does |
-|------|-------------|
-| agent.py | Main agent code |
-| requirements.txt | Libraries needed |
-| README.md | This guide |
+Deployed on **Railway** — running 24/7 in the cloud. 🚂
+
+---
+
+## 🛠️ Tech Stack
+
+| Tool | Purpose |
+|------|---------|
+| Python | Core language |
+| Groq + LLaMA 3 | AI model — free & ultra fast |
+| python-telegram-bot | Telegram integration |
+| DuckDuckGo API | Web search — no key needed |
+| Railway | Cloud hosting — free tier |
+
+---
+
+## 👨‍💻 Built by
+**sirisha**
