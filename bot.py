@@ -15,8 +15,10 @@ logger = logging.getLogger(__name__)
 #   CONFIG — set via environment variables
 # ─────────────────────────────────────────────
 
-TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
-GROQ_API_KEY   = os.environ.get("GROQ_API_KEY", "")
+import os
+
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_URL   = "https://api.groq.com/openai/v1/chat/completions"
 
 MODELS = [
@@ -305,7 +307,8 @@ def main():
         return
 
     logger.info("🤖 Debugging Agent Bot starting...")
-
+    print("TOKEN:", repr(TELEGRAM_TOKEN))
+    print("LENGTH:", len(TELEGRAM_TOKEN))
     app = Application.builder().token(TELEGRAM_TOKEN).build()
 
     app.add_handler(CommandHandler("start",   start))
